@@ -48,6 +48,24 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Designr Labs Feature Highlight */}
+        <div className="mt-12 p-6 bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl">
+          <div className="flex items-center justify-between">
+            <div className="text-left">
+              <h2 className="text-xl font-bold text-gray-900">Designr Labs</h2>
+              <p className="mt-1 text-gray-600">
+                Visual-to-Prompt Translation Engine - Turn any design screenshot into precise AI prompts
+              </p>
+            </div>
+            <Link
+              href="/designr-labs"
+              className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors whitespace-nowrap ml-4"
+            >
+              Try It Now
+            </Link>
+          </div>
+        </div>
+
         <div className="mt-8 sm:mt-12">
           <Link href="/dashboard" className="btn btn-primary">
             Explore Dashboard
