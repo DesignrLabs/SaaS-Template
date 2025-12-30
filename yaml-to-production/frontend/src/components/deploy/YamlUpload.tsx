@@ -5,7 +5,7 @@ import { useDeployStore } from '@/stores/deploy';
 import { useAuthToken } from '@/hooks/useAuth';
 import { yamlApi } from '@/services/api';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
-import { Upload, FileText, AlertCircle, ChevronRight, Code } from 'lucide-react';
+import { Upload, FileText, AlertCircle, ChevronRight } from 'lucide-react';
 
 export default function YamlUpload() {
   const { getToken } = useAuthToken();

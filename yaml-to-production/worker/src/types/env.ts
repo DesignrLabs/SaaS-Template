@@ -25,15 +25,18 @@ export interface Project {
   id: string;
   user_id: string;
   name: string;
+  description?: string;
   yaml_content: string;
-  parsed_config: string; // JSON stringified
-  tech_stack: string;
+  parsed_config: string | null;
+  tech_stack: string | null;
   status: 'draft' | 'processing' | 'deployed' | 'failed';
   security_score: number | null;
   vercel_project_id: string | null;
   vercel_deployment_id: string | null;
   production_url: string | null;
   preview_url: string | null;
+  environment: string;
+  region: string;
   created_at: string;
   updated_at: string;
 }
@@ -42,20 +45,27 @@ export interface Deployment {
   id: string;
   project_id: string;
   user_id: string;
-  status: 'pending' | 'building' | 'deploying' | 'success' | 'failed';
+  status: 'pending' | 'validating' | 'generating' | 'auditing' | 'packaging' | 'uploading' | 'building' | 'deploying' | 'success' | 'failed';
   vercel_deployment_id: string | null;
+  vercel_deployment_url: string | null;
   logs: string;
+  progress: number;
+  current_stage: string | null;
   started_at: string;
   completed_at: string | null;
   error_message: string | null;
+  generated_files_count: number;
+  security_score: number | null;
 }
 
 export interface CustomDomain {
   id: string;
   project_id: string;
+  user_id: string;
   domain: string;
-  verified: boolean;
-  dns_records: string; // JSON stringified
+  verified: number; // SQLite boolean (0 or 1)
+  dns_records: string;
+  verification_token: string;
   created_at: string;
   verified_at: string | null;
 }
@@ -64,17 +74,26 @@ export interface UserApiKey {
   id: string;
   user_id: string;
   key_name: string;
+  key_type: string;
   encrypted_value: string;
+  iv: string;
   created_at: string;
+  updated_at: string;
 }
 
 export interface MCPServerConfig {
   id: string;
   name: string;
+  display_name: string;
   description: string;
-  required: boolean;
-  config_schema: string; // JSON schema
+  category: string;
+  required: number;
+  config_schema: string;
   oauth_url: string | null;
+  documentation_url: string | null;
+  icon_url: string | null;
+  enabled: number;
+  created_at: string;
 }
 
 export interface YamlSpec {
@@ -139,4 +158,12 @@ export interface GeneratedFile {
   path: string;
   content: string;
   type: 'source' | 'config' | 'style' | 'asset';
+}
+
+export interface GenerationProgress {
+  stage: string;
+  message: string;
+  filesGenerated: number;
+  totalFiles: number;
+  progress: number;
 }

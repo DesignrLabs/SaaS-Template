@@ -248,7 +248,7 @@ export class DeploymentSession extends DurableObject {
         stage: 'failed',
         progress: this.sessionState.progress.progress,
         message: body.message,
-        details: body.details
+        details: body.details as Record<string, unknown> | undefined
       };
       this.sessionState.completedAt = new Date().toISOString();
 

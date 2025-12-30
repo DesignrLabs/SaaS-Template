@@ -344,11 +344,11 @@ async function executeDeployment(
 
     await db.updateProject(project.id, {
       status: 'deployed',
-      vercelProjectId: deployResult.projectId,
-      vercelDeploymentId: deployResult.deploymentId,
-      productionUrl: deployResult.url,
-      previewUrl: deployResult.previewUrl,
-      securityScore: auditResult.score
+      vercel_project_id: deployResult.projectId,
+      vercel_deployment_id: deployResult.deploymentId,
+      production_url: deployResult.url,
+      preview_url: deployResult.previewUrl,
+      security_score: auditResult.score
     });
 
     await db.updateDeployment(deployment.id, {

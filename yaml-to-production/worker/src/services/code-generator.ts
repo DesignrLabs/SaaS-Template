@@ -1,12 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { YamlSpec, GeneratedCode, GeneratedFile } from '../types/env';
-
-export interface GenerationProgress {
-  stage: string;
-  message: string;
-  filesGenerated: number;
-  totalFiles: number;
-}
+import { YamlSpec, GeneratedCode, GeneratedFile, GenerationProgress } from '../types/env';
 
 export type ProgressCallback = (progress: GenerationProgress) => void;
 
@@ -34,7 +27,8 @@ export class CodeGeneratorService {
         stage: 'analyzing',
         message: 'Analyzing project requirements...',
         filesGenerated: 0,
-        totalFiles: 0
+        totalFiles: 0,
+        progress: 0
       });
 
       const projectPlan = await this.analyzeProject(spec, techStack);
@@ -44,7 +38,8 @@ export class CodeGeneratorService {
         stage: 'generating-config',
         message: 'Generating configuration files...',
         filesGenerated: 0,
-        totalFiles: projectPlan.estimatedFiles
+        totalFiles: projectPlan.estimatedFiles,
+        progress: 10
       });
 
       const configFiles = await this.generateConfigFiles(spec, techStack, projectPlan);
@@ -61,7 +56,8 @@ export class CodeGeneratorService {
           stage: 'generating-features',
           message: `Generating ${feature.name}...`,
           filesGenerated: generatedCount,
-          totalFiles: projectPlan.estimatedFiles
+          totalFiles: projectPlan.estimatedFiles,
+          progress: 20 + (generatedCount / projectPlan.estimatedFiles) * 30
         });
 
         const featureFiles = await this.generateFeatureFiles(spec, feature, techStack);
@@ -75,7 +71,8 @@ export class CodeGeneratorService {
           stage: 'generating-integrations',
           message: `Setting up ${integration.name}...`,
           filesGenerated: generatedCount,
-          totalFiles: projectPlan.estimatedFiles
+          totalFiles: projectPlan.estimatedFiles,
+          progress: 50 + (generatedCount / projectPlan.estimatedFiles) * 30
         });
 
         const integrationFiles = await this.generateIntegrationFiles(spec, integration, techStack);
@@ -88,7 +85,8 @@ export class CodeGeneratorService {
         stage: 'finalizing',
         message: 'Finalizing project structure...',
         filesGenerated: generatedCount,
-        totalFiles: projectPlan.estimatedFiles
+        totalFiles: projectPlan.estimatedFiles,
+        progress: 80
       });
 
       const entryFiles = await this.generateEntryFiles(spec, techStack, files);
@@ -98,7 +96,8 @@ export class CodeGeneratorService {
         stage: 'complete',
         message: 'Code generation complete!',
         filesGenerated: files.length,
-        totalFiles: files.length
+        totalFiles: files.length,
+        progress: 100
       });
 
       return {

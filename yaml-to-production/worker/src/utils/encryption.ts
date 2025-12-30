@@ -99,9 +99,9 @@ export async function generateKey(): Promise<string> {
     { name: ALGORITHM, length: KEY_LENGTH },
     true,
     ['encrypt', 'decrypt']
-  );
+  ) as CryptoKey;
 
-  const exported = await crypto.subtle.exportKey('raw', key);
+  const exported = await crypto.subtle.exportKey('raw', key) as ArrayBuffer;
   return bytesToHex(new Uint8Array(exported));
 }
 

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuthToken } from '@/hooks/useAuth';
-import { projectsApi, domainsApi, deploymentsApi } from '@/services/api';
+import { projectsApi, domainsApi } from '@/services/api';
 import { toast } from 'sonner';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
 import {
@@ -19,7 +19,7 @@ import {
   RefreshCw,
   AlertTriangle,
 } from 'lucide-react';
-import type { Project, Deployment, CustomDomain } from '@/types';
+import type { Deployment, CustomDomain } from '@/types';
 
 export default function ProjectPage() {
   const { id } = useParams<{ id: string }>();

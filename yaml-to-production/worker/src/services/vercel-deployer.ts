@@ -151,7 +151,7 @@ export class VercelDeployerService {
     });
 
     if (!response.ok) {
-      const error = await response.json();
+      const error = await response.json() as { error?: { message?: string } };
       throw new Error(`Failed to create project: ${error.error?.message || 'Unknown error'}`);
     }
 
@@ -192,7 +192,7 @@ export class VercelDeployerService {
     });
 
     if (!response.ok) {
-      const error = await response.json();
+      const error = await response.json() as { error?: { message?: string } };
       throw new Error(`Failed to create deployment: ${error.error?.message || 'Unknown error'}`);
     }
 
@@ -267,7 +267,7 @@ export class VercelDeployerService {
       });
 
       if (!response.ok) {
-        const error = await response.json();
+        const error = await response.json() as { error?: { message?: string } };
         // Ignore if env var already exists
         if (!error.error?.message?.includes('already exists')) {
           console.warn(`Failed to set env var ${key}:`, error.error?.message);
@@ -290,7 +290,7 @@ export class VercelDeployerService {
     });
 
     if (!response.ok) {
-      const error = await response.json();
+      const error = await response.json() as { error?: { message?: string } };
       throw new Error(`Failed to add domain: ${error.error?.message || 'Unknown error'}`);
     }
 
@@ -309,7 +309,7 @@ export class VercelDeployerService {
       return false;
     }
 
-    const result = await response.json();
+    const result = await response.json() as { verified?: boolean };
     return result.verified === true;
   }
 
@@ -356,7 +356,7 @@ export class VercelDeployerService {
       throw new Error('Failed to get deployments');
     }
 
-    const result = await response.json();
+    const result = await response.json() as { deployments: VercelDeployment[] };
     return result.deployments;
   }
 

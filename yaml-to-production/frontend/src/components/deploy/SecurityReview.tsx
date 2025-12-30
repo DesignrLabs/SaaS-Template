@@ -18,7 +18,6 @@ export default function SecurityReview() {
   const { getToken } = useAuthToken();
   const {
     yamlContent,
-    yamlSpec,
     setSecurityResults,
     securityScore,
     securityIssues,

@@ -10,8 +10,6 @@ import {
   Trash2,
   Eye,
   EyeOff,
-  CheckCircle,
-  XCircle,
   RefreshCw,
   User,
   Mail,

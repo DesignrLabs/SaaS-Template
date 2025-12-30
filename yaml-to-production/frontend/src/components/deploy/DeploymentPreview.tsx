@@ -123,7 +123,7 @@ export default function DeploymentPreview() {
             {previewUrl || productionUrl ? (
               <iframe
                 key={iframeKey}
-                src={previewUrl || productionUrl}
+                src={previewUrl || productionUrl || undefined}
                 className="w-full h-full border-0"
                 title="App Preview"
                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups"

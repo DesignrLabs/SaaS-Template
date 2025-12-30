@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useDeployStore } from '@/stores/deploy';
 import { useDeploymentWebSocket } from '@/hooks/useDeployment';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
@@ -74,7 +73,6 @@ export default function DeploymentProgress() {
           const Icon = stage.icon;
           const isActive = stage.id === currentStage;
           const isCompleted = currentStageIndex > index || isComplete;
-          const isPending = currentStageIndex < index && !isComplete;
           const isError = isFailed && isActive;
 
           return (

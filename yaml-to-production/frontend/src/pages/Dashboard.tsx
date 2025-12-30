@@ -212,14 +212,14 @@ function ProjectCard({ project }: { project: Project }) {
             <span className="text-xs text-gray-500">Security Score</span>
             <span
               className={`text-xs font-medium ${
-                project.security_score >= 85
+                (project.security_score ?? 0) >= 85
                   ? 'text-green-600'
-                  : project.security_score >= 70
+                  : (project.security_score ?? 0) >= 70
                   ? 'text-yellow-600'
                   : 'text-red-600'
               }`}
             >
-              {project.security_score}/100
+              {project.security_score ?? 0}/100
             </span>
           </div>
         </div>
